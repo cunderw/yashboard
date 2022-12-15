@@ -10,8 +10,6 @@ export type ServiceProps = { // Todo
 
 type Props = { // Props
   service: ServiceProps;
-  updateService: Function;
-  deleteService: Function;
 }
 
 

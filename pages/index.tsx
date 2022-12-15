@@ -10,41 +10,8 @@ import AddServiceForm from '../components/forms/AddServiceForm';
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Home: React.FC = () => {
-  const { data, error, isLoading } = useSWR<ServiceProps[], Error>('/api/service', fetcher);
+  const { data, error, isLoading } = useSWR<ServiceProps[], Error>('/api/service', fetcher, { refreshInterval: 1000 });
   const [showAddService, setShowAddService] = useState(false);
-  const updateService = async (id: string, name: string, url: string) => {
-    const data = {
-      id,
-      name,
-      url
-    }
-
-    await fetch(
-      '/api/service/',
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-  }
-
-  const deleteService = async (id: string) => {
-    const data = {
-      id
-    }
-
-    await fetch(
-      '/api/service/',
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-  }
 
   if (error) return <div>failed to load</div>
   if (isLoading) return <div>loading...</div>
@@ -66,8 +33,6 @@ const Home: React.FC = () => {
                 <ServiceCard
                   key={service.id}
                   service={service}
-                  deleteService={deleteService}
-                  updateService={updateService}
                 />
               ))
             }
