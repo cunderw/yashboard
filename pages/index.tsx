@@ -1,40 +1,41 @@
-import type { GetServerSideProps } from 'next';
+import useSWR from 'swr'
 import Head from 'next/head';
 import { useState } from 'react';
 import styles from '../styles/Home.module.css';
 import Layout from '../components/Layout';
 import ServiceCard, { ServiceProps } from '../components/ServiceCard';
-import AddServiceForm from '../components/AddServiceForm';
-import prisma from '../lib/prisma';
+import AddServiceForm from '../components/forms/AddServiceForm';
 
-export const getServerSideProps: GetServerSideProps = async () => {
 
-  const services = await prisma.service.findMany({
-  });
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-  return {
-    props: { services: services },
-  }
-}
-
-type Props = {
-  services: ServiceProps[]
-}
-
-const Home: React.FC<Props> = (props) => {
+const Home: React.FC = () => {
+  const { data, error, isLoading } = useSWR<ServiceProps[], Error>('/api/service', fetcher);
   const [showAddService, setShowAddService] = useState(false);
-  const [services, setServices] = useState(props.services);
+  const updateService = async (id: string, name: string, url: string) => {
+    const data = {
+      id,
+      name,
+      url
+    }
 
-  function addService(service: ServiceProps) {
-    setServices([...services, service]);
+    await fetch(
+      '/api/service/',
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      });
   }
 
-  async function deleteService(id: string) {
+  const deleteService = async (id: string) => {
     const data = {
       id
     }
-    console.log(data)
-    const request = await fetch(
+
+    await fetch(
       '/api/service/',
       {
         method: "DELETE",
@@ -43,15 +44,10 @@ const Home: React.FC<Props> = (props) => {
         },
         body: JSON.stringify(data)
       });
-
-    const response = await request.json();
-
-    if (response) {
-      setServices(
-        services.filter(service => service.id !== id)
-      );
-    }
   }
+
+  if (error) return <div>failed to load</div>
+  if (isLoading) return <div>loading...</div>
 
   return (
     <Layout>
@@ -62,12 +58,17 @@ const Home: React.FC<Props> = (props) => {
       </Head>
       {
         showAddService ? (
-          <AddServiceForm addService={addService} />
+          <AddServiceForm/>
         ) : (
-          services.length > 0 ? (
+          data !== undefined && data.length > 0 ? (
             <div className={styles.grid}> {
-              services.map((service) => (
-                <ServiceCard key={service.id} service={service} deleteService={deleteService} />
+              data.map((service) => (
+                <ServiceCard
+                  key={service.id}
+                  service={service}
+                  deleteService={deleteService}
+                  updateService={updateService}
+                />
               ))
             }
             </div>

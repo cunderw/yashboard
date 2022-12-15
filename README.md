@@ -4,6 +4,7 @@ Yet Another Self Hosted Dashboard
 ## Getting Started
 ### Running the Development Server
 ```bash
+npm install
 npx prisma migrate dev
 npm run dev
 ```

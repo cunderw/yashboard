@@ -1,12 +1,8 @@
 import { useState } from 'react';
 
-import styles from '../styles/Form.module.css';
+import styles from '../../styles/Form.module.css';
 
-type Props = {
-  addService: Function;
-}
-
-const AddService: React.FC<Props> = ({ addService: addService }) => {
+const AddService: React.FC = () => {
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
   const [error, setError] = useState('');
@@ -40,9 +36,9 @@ const AddService: React.FC<Props> = ({ addService: addService }) => {
       setName('');
       setUrl('');
       setMessage('Service added successfully');
-      addService(data);
     });
   }
+
   return (
     <div className={styles.formContainer}>
       <form onSubmit={handleSubmit}>

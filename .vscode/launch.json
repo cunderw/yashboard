@@ -7,14 +7,27 @@
       "name": "Debug",
       "cwd": "${workspaceFolder}",
       "sourceMaps": true,
-      "protocol": "inspector",
       "console": "integratedTerminal",
-      "resolveSourceMapLocations": ["${workspaceFolder}/dist/**/*.js", "${workspaceFolder}/**", "!**/node_modules/**"],
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/dist/**/*.js",
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ],
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/next",
       "env": {
         "NODE_ENV": "development"
+      },
+      "serverReadyAction": {
+        "pattern": "started server on .+, url: (https?://.+)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome"
       }
+    },
+    {
+      "name": "Debug Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000"
     }
   ]
 }
-
