@@ -1,19 +1,19 @@
-import useSWR from 'swr'
 import Head from 'next/head';
 import { useState } from 'react';
 import styles from '../styles/Home.module.css';
+import { useApplications } from '../hooks/UseApplication'
 import Layout from '../components/Layout';
-import ServiceCard, { ServiceProps } from '../components/ServiceCard';
-import AddServiceForm from '../components/forms/AddServiceForm';
+import ApplicationCard from '../components/ApplicationCard';
+import AddApplicationForm from '../components/forms/AddApplicationForm';
 
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 
 const Home: React.FC = () => {
-  const { data, error, isLoading } = useSWR<ServiceProps[], Error>('/api/service', fetcher, { refreshInterval: 1000 });
-  const [showAddService, setShowAddService] = useState(false);
+  const { applications, isError, isLoading } = useApplications();
+  const [showAddApplication, setShowAddApplication] = useState(false);
 
-  if (error) return <div>failed to load</div>
+  if (isError) return <div>failed to load</div>
   if (isLoading) return <div>loading...</div>
 
   return (
@@ -24,30 +24,30 @@ const Home: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {
-        showAddService ? (
-          <AddServiceForm/>
+        showAddApplication ? (
+          <AddApplicationForm />
         ) : (
-          data !== undefined && data.length > 0 ? (
+          applications !== undefined && applications.length > 0 ? (
             <div className={styles.grid}> {
-              data.map((service) => (
-                <ServiceCard
-                  key={service.id}
-                  service={service}
+              applications.map((application) => (
+                <ApplicationCard
+                  key={application.id}
+                  appId={application.id}
                 />
               ))
             }
             </div>
           ) : (
             <div>
-              <h4>You do not have any services added.</h4>
+              <h4>You do not have any apps added.</h4>
             </div>
           )
         )
       }
       <div>
-        <button className={styles.addServiceBtn} onClick={() => setShowAddService(!showAddService)}>
+        <button className={styles.addBtn} onClick={() => setShowAddApplication(!showAddApplication)}>
           {
-            showAddService ? "Back to Services" : "Add Service"
+            showAddApplication ? "Back to Apps" : "Add App"
           }
         </button>
       </div>

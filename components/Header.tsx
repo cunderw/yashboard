@@ -19,7 +19,7 @@ const Header: React.FC = () => {
       <div className={styles.center}>
         <Link href="/">
           <a className={styles.bold} data-active={isActive('/')}>
-            Services
+            Apps
           </a>
         </Link>
       </div>

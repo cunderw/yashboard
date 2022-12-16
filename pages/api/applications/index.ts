@@ -1,13 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '../../lib/prisma';
+import prisma from '../../../lib/prisma';
 
 export default async function handle(req: NextApiRequest, res: NextApiResponse) {
   if (req.method == "GET") {
-    const services = await prisma.service.findMany({});
-    return res.json(services)
+      const applications = await prisma.application.findMany({});
+      return res.json(applications)
   } else if (req.method == "POST") {
     const { name, url } = req.body
-    const result = await prisma.service.create({
+    const result = await prisma.application.create({
       data: {
         name,
         url
@@ -16,7 +16,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
     return res.json(result)
   } else if (req.method == "PUT") {
     const { id, name, url } = req.body;
-    const post = await prisma.service.update({
+    const post = await prisma.application.update({
       where: { id: String(id) },
       data: {
         name: String(name),
@@ -26,7 +26,7 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse) 
     return res.json(post);
   } else if (req.method == "DELETE") {
     const { id } = req.body;
-    const post = await prisma.service.delete({
+    const post = await prisma.application.delete({
       where: {
         id: String(id)
       },
