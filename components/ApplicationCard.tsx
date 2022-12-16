@@ -1,7 +1,13 @@
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
-import styles from "../styles/Application.module.css";
-import { useApplication } from '../hooks/UseApplication'
 import UpdateApplicationForm from '../components/forms/UpdateApplicationForm';
+import { useApplication } from '../hooks/UseApplication';
 
 type Props = { // Props
   appId: string;
@@ -15,25 +21,43 @@ const ApplicationCard: React.FC<Props> = (props) => {
   if (isError) return <div>failed to load</div>
   if (isLoading) return <div>loading...</div>
 
-  return (
-    showUpdateApplication ? (
-      <div className={styles.card}>
+  const card = (
+    <React.Fragment>
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          {application?.url}
+        </Typography>
+        <Typography variant="h5" component="div">
+          {application?.name}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small" onClick={() => setShowUpdateApplication(!showUpdateApplication)}>Edit</Button>
+      </CardActions>
+    </React.Fragment>
+  );
+
+  const updateCard = (
+    <React.Fragment>
+      <CardContent>
         <UpdateApplicationForm
           appId={props.appId}
         />
-        <button className={styles.actionBtn} onClick={() => setShowUpdateApplication(!showUpdateApplication)}>Edit</button>
-      </div>
-    ) : (
-      <div className={styles.card}>
-        <h4 className={styles.title}>
-          {application?.name}
-        </h4>
-        <p className={styles.description}>
-          <span className={styles.url}>{application?.url}</span>
-        </p>
-        <button className={styles.actionBtn} onClick={() => setShowUpdateApplication(!showUpdateApplication)}>Edit</button>
-      </div>
-    )
+      </CardContent>
+      <CardActions>
+        <Button size="small" onClick={() => setShowUpdateApplication(!showUpdateApplication)}>Done</Button>
+      </CardActions>
+    </React.Fragment>
+  );
+
+  return (
+    <Box sx={{ minWidth: 275 }}>
+      <Paper>
+      {
+       showUpdateApplication ? <Card variant="outlined">{updateCard}</Card> :<Card variant="outlined">{card}</Card>
+      }
+      </Paper>
+    </Box>
   )
 }
 

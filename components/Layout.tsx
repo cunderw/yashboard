@@ -1,18 +1,18 @@
-import React,{ReactNode} from 'react';
-import styles from "../styles/Layout.module.css";
+import React, { ReactNode } from 'react';
 import Header from './Header';
+import Box from '@mui/material/Box';
 
 type Props = {
-    children: ReactNode
+  children: ReactNode
 }
 
-const Layout:React.FC<Props> = ({children}) => {
+const Layout: React.FC<Props> = ({ children }) => {
   return (
     <div>
-        <Header />
-        <main className={styles.layout}>
-            {children}
-        </main>
+      <Header />
+      <Box sx={{ flexGrow: 1 }}>
+        {children}
+      </Box>
     </div>
   )
 }

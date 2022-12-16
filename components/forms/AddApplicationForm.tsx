@@ -1,6 +1,9 @@
+import Alert from '@mui/material/Alert';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import TextField from '@mui/material/TextField';
 import { useState } from 'react';
-
-import styles from '../../styles/Form.module.css';
 
 const AddApplication: React.FC = () => {
   const [name, setName] = useState('');
@@ -39,37 +42,33 @@ const AddApplication: React.FC = () => {
   }
 
   return (
-    <div className={styles.formContainer}>
-      {
+    <Container maxWidth="sm">  {
         error && (
-          <div className={styles.formGroupError}>
-            {
-              error
-            }
-          </div>
+          <Alert severity="error">{error}</Alert>
         )
       }
       {
         message && (
-          <div className={styles.formGroupSuccess}>
-            {
-              message
-            }
-          </div>
+          <Alert severity="success">{message}</Alert>
         )
       }
-      <div className={styles.formGroup}>
-        <input type="text" name="name" id="name" placeholder='Name of App' value={name} onChange={
+      <Box
+        component="form"
+        sx={{
+          '& > :not(style)': { m: 1, width: '25ch' },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField variant="outlined" id="name-input" label='Name' value={name} onChange={
           (e) => setName(e.target.value)
         } />
-        <input type="text" name="url" id="url" placeholder='URL of App' value={url} onChange={
+        <TextField variant="outlined" id="url-input" label='URL' value={url} onChange={
           (e) => setUrl(e.target.value)
         } />
-      </div>
-      <div className={styles.formGroup}>
-        <button className={styles.addBtn} onClick={() => addApplication()}>Submit</button>
-      </div>
-    </div>
+        <Button variant="contained" onClick={() => addApplication()}>Submit</Button>
+      </Box>
+    </Container>
   )
 }
 
