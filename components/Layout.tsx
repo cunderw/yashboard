@@ -10,7 +10,7 @@ const Layout: React.FC<Props> = ({ children }) => {
   return (
     <div>
       <Header />
-      <Box sx={{ flexGrow: 1 }}>
+      <Box sx={{ flexGrow: 1, m:0.5 }}>
         {children}
       </Box>
     </div>

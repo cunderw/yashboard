@@ -43,10 +43,10 @@ const AddApplication: React.FC = () => {
 
   return (
     <Container maxWidth="sm">  {
-        error && (
-          <Alert severity="error">{error}</Alert>
-        )
-      }
+      error && (
+        <Alert severity="error">{error}</Alert>
+      )
+    }
       {
         message && (
           <Alert severity="success">{message}</Alert>
