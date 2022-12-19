@@ -28,7 +28,7 @@ const Home: React.FC = () => {
         <AddApplicationForm />
       </PopupModal>
       <Applications />
-      <Container maxWidth="sm">
+      <Container sx={{ m:0.5 }}>
         <Button variant="contained" onClick={handleOpenAddApplicationModal}>Add App</Button>
       </Container>
     </Layout>
