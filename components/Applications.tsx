@@ -14,11 +14,11 @@ const Applications: React.FC = () => {
   if (isLoading) return <div>loading...</div>
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={1}>
       {
         applications !== undefined && applications.length > 0 ? (
           applications.map((application) => (
-            <Grid key={application.id} item xs={2}>
+            <Grid key={application.id} item xs={12} sm={6} md={2} zeroMinWidth>
               <ApplicationCard
                 key={application.id}
                 appId={application.id}

@@ -24,10 +24,10 @@ const ApplicationCard: React.FC<Props> = (props) => {
   const card = (
     <React.Fragment>
       <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" noWrap>
           {application?.url}
         </Typography>
-        <Typography variant="h5" component="div">
+        <Typography variant="h5" noWrap>
           {application?.name}
         </Typography>
       </CardContent>
@@ -51,7 +51,7 @@ const ApplicationCard: React.FC<Props> = (props) => {
   );
 
   return (
-    <Box sx={{ minWidth: 275 }}>
+    <Box>
       <Paper>
       {
        showUpdateApplication ? <Card variant="outlined">{updateCard}</Card> :<Card variant="outlined">{card}</Card>
