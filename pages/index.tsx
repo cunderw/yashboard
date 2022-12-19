@@ -9,28 +9,25 @@ import PopupModal from '../components/PopupModal';
 
 
 const Home: React.FC = () => {
-  const [openAddApplicationModal, setOpenAddApplicationModal] = useState(false);
-  const handleOpenAddApplicationModal = () => setOpenAddApplicationModal(true);
-  const handleCloseAddApplicationModal = () => setOpenAddApplicationModal(false);
+  const [addAppModalOpen, setAppModalOpen] = useState(false);
+  const openAddAppModal = () => {setAppModalOpen(true)};
+  const closeAddAppModal = () => setAppModalOpen(false);
 
   return (
-    <Layout>
+    <Layout openAddAppModal={openAddAppModal}>
       <Head>
         <title>YaSHBoard</title>
         <meta name="description" content="Yet Another Self Hosted Dashboard" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PopupModal
-        open={openAddApplicationModal}
-        handleClose={handleCloseAddApplicationModal}
+        open={addAppModalOpen}
+        handleClose={closeAddAppModal}
         title="Add App"
       >
         <AddApplicationForm />
       </PopupModal>
       <Applications />
-      <Container sx={{ m:0.5 }}>
-        <Button variant="contained" onClick={handleOpenAddApplicationModal}>Add App</Button>
-      </Container>
     </Layout>
   )
 }

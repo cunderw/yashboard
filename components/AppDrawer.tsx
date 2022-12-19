@@ -12,7 +12,11 @@ import ListItemText from '@mui/material/ListItemText';
 import React, { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 
-const AppDrawer: React.FC = () => {
+type Props = {
+  openAddAppModal: Function
+}
+
+const AppDrawer: React.FC<Props> = (props) => {
   const [state, setState] = useState({
     open: false,
   });
@@ -39,8 +43,12 @@ const AppDrawer: React.FC = () => {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        <ListItem key="add" disablePadding>
-          <ListItemButton>
+        <ListItem
+          key="add"
+          onClick={() => props.openAddAppModal()}
+          disablePadding
+        >
+          <ListItemButton >
             <ListItemIcon>
               <AddIcon />
             </ListItemIcon>

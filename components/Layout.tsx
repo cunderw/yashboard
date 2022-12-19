@@ -4,12 +4,13 @@ import Box from '@mui/material/Box';
 
 type Props = {
   children: ReactNode
+  openAddAppModal: Function
 }
 
-const Layout: React.FC<Props> = ({ children }) => {
+const Layout: React.FC<Props> = ({ children, openAddAppModal }) => {
   return (
     <div>
-      <Header />
+      <Header openAddAppModal={openAddAppModal}/>
       <Box sx={{ m:0.5 }}>
         {children}
       </Box>

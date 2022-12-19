@@ -7,6 +7,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import AppDrawer from './AppDrawer';
 
+type Props = {
+  openAddAppModal: Function
+}
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -49,12 +53,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-const Header = () => {
+const Header: React.FC<Props> = (props) => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <AppDrawer />
+          <AppDrawer
+            openAddAppModal={props.openAddAppModal}
+          />
           <Typography
             variant="h6"
             noWrap
