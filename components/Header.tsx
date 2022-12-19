@@ -1,11 +1,11 @@
-import SearchIcon from '@mui/icons-material/Search';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import InputBase from '@mui/material/InputBase';
-import { alpha, styled } from '@mui/material/styles';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import AppDrawer from './AppDrawer';
+import SearchIcon from '@mui/icons-material/Search'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import InputBase from '@mui/material/InputBase'
+import { alpha, styled } from '@mui/material/styles'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import AppDrawer from './AppDrawer'
 
 type Props = {
   openAddAppModal: Function
@@ -27,7 +27,7 @@ const Search = styled('div')(({ theme }) => ({
     marginLeft: theme.spacing(1),
     width: 'auto',
   },
-}));
+}))
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),
@@ -37,7 +37,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-}));
+}))
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
@@ -54,9 +54,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       },
     },
   },
-}));
+}))
 
-const Header: React.FC<Props> = (props) => {
+const Header: React.FC<Props> = props => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -87,7 +87,7 @@ const Header: React.FC<Props> = (props) => {
         </Toolbar>
       </AppBar>
     </Box>
-  );
+  )
 }
 
 export default Header

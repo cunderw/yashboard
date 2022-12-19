@@ -1,5 +1,5 @@
-export type Application = { // Todo 
-  id: string;
-  name: string;
-  url: string;
+export type Application = {
+  id: string
+  name: string
+  url: string
 }

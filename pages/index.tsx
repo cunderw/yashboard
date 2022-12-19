@@ -1,19 +1,16 @@
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Head from 'next/head';
-import { useState } from 'react';
-import Applications from '../components/Applications';
-import AddApplicationForm from '../components/forms/AddApplicationForm';
-import Layout from '../components/Layout';
-import PopupModal from '../components/PopupModal';
-
+import Head from 'next/head'
+import { useState } from 'react'
+import Applications from '../components/Applications'
+import AddApplicationForm from '../components/forms/AddApplicationForm'
+import Layout from '../components/Layout'
+import PopupModal from '../components/PopupModal'
 
 const Home: React.FC = () => {
-  const [addAppModalOpen, setAppModalOpen] = useState(false);
-  const [isEditMode, setEditMode] = useState(false);
-  const openAddAppModal = () => setAppModalOpen(true);
-  const closeAddAppModal = () => setAppModalOpen(false);
-  const enableEditMode = () => setEditMode(true);
+  const [addAppModalOpen, setAppModalOpen] = useState(false)
+  const [isEditMode, setEditMode] = useState(false)
+  const openAddAppModal = () => setAppModalOpen(true)
+  const closeAddAppModal = () => setAppModalOpen(false)
+  const enableEditMode = () => setEditMode(true)
   const disableEditMode = () => setEditMode(false)
 
   return (
@@ -35,11 +32,9 @@ const Home: React.FC = () => {
       >
         <AddApplicationForm />
       </PopupModal>
-      <Applications
-        isEditMode={isEditMode}
-      />
+      <Applications isEditMode={isEditMode} />
     </Layout>
   )
 }
 
-export default Home;
+export default Home

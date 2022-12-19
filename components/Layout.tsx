@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
-import Header from './Header';
-import Box from '@mui/material/Box';
+import React, { ReactNode } from 'react'
+import Header from './Header'
+import Box from '@mui/material/Box'
 
 type Props = {
   children: ReactNode
@@ -10,7 +10,7 @@ type Props = {
   disableEditMode: Function
 }
 
-const Layout: React.FC<Props> = (props) => {
+const Layout: React.FC<Props> = props => {
   return (
     <div>
       <Header
@@ -19,11 +19,9 @@ const Layout: React.FC<Props> = (props) => {
         enableEditMode={props.enableEditMode}
         disableEditMode={props.disableEditMode}
       />
-      <Box sx={{ m: 0.5 }}>
-        {props.children}
-      </Box>
+      <Box sx={{ m: 0.5 }}>{props.children}</Box>
     </div>
   )
 }
 
-export default Layout;
+export default Layout
