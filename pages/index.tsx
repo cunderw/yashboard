@@ -22,7 +22,7 @@ const Home: React.FC = () => {
     >
       <Head>
         <title>YaSHBoard</title>
-        <meta name="description" content="Yet Another Self Hosted Dashboard" />
+        <meta name="YaSHBoard" content="Yet Another Self Hosted Dashboard" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <PopupModal

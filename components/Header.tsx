@@ -59,7 +59,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Header: React.FC<Props> = props => {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" data-testid="app-bar">
         <Toolbar>
           <AppDrawer
             openAddAppModal={props.openAddAppModal}
