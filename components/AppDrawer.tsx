@@ -83,11 +83,17 @@ const AppDrawer: React.FC<Props> = props => {
         aria-label="open drawer"
         sx={{ mr: 2 }}
         onClick={toggleDrawer(true)}
+        data-testid="drawer-button"
       >
         <MenuIcon />
       </IconButton>
       <React.Fragment key={'menu'}>
-        <Drawer anchor="left" open={state.open} onClose={toggleDrawer(false)}>
+        <Drawer
+          anchor="left"
+          open={state.open}
+          onClose={toggleDrawer(false)}
+          data-testid="app-drawer"
+        >
           {list()}
         </Drawer>
       </React.Fragment>
