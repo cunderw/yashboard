@@ -9,6 +9,9 @@ import AppDrawer from './AppDrawer';
 
 type Props = {
   openAddAppModal: Function
+  isEditMode: boolean
+  enableEditMode: Function
+  disableEditMode: Function
 }
 
 const Search = styled('div')(({ theme }) => ({
@@ -60,6 +63,9 @@ const Header: React.FC<Props> = (props) => {
         <Toolbar>
           <AppDrawer
             openAddAppModal={props.openAddAppModal}
+            isEditMode={props.isEditMode}
+            enableEditMode={props.enableEditMode}
+            disableEditMode={props.disableEditMode}
           />
           <Typography
             variant="h6"

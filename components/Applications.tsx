@@ -1,14 +1,14 @@
 import Alert from '@mui/material/Alert';
 import Grid from '@mui/material/Grid';
 import ApplicationCard from '../components/ApplicationCard';
-
-import { useState } from 'react';
 import { useApplications } from '../hooks/UseApplication'
 
+type Props = {
+  isEditMode: boolean
+}
 
-const Applications: React.FC = () => {
+const Applications: React.FC<Props> = (props) => {
   const { applications, isError, isLoading } = useApplications();
-  const [showAddApplication, setShowAddApplication] = useState(false);
 
   if (isError) return <div>failed to load</div>
   if (isLoading) return <div>loading...</div>
@@ -22,6 +22,7 @@ const Applications: React.FC = () => {
               <ApplicationCard
                 key={application.id}
                 appId={application.id}
+                isEditMode={props.isEditMode}
               />
             </Grid>
           ))

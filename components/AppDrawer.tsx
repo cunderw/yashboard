@@ -14,6 +14,9 @@ import AddIcon from '@mui/icons-material/Add';
 
 type Props = {
   openAddAppModal: Function
+  isEditMode: boolean
+  enableEditMode: Function
+  disableEditMode: Function
 }
 
 const AppDrawer: React.FC<Props> = (props) => {
@@ -35,6 +38,10 @@ const AppDrawer: React.FC<Props> = (props) => {
         setState({ ...state, open: open });
       };
 
+  const toggleEditMode = () => {
+    props.isEditMode ? props.disableEditMode() : props.enableEditMode();
+  }
+
   const list = () => (
     <Box
       sx={{ width: 250 }}
@@ -55,7 +62,11 @@ const AppDrawer: React.FC<Props> = (props) => {
             <ListItemText primary="Add" />
           </ListItemButton>
         </ListItem>
-        <ListItem key="edit" disablePadding>
+        <ListItem
+          key="edit"
+          disablePadding
+          onClick={toggleEditMode}
+        >
           <ListItemButton>
             <ListItemIcon>
               <EditIcon />

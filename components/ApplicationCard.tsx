@@ -11,6 +11,7 @@ import { useApplication } from '../hooks/UseApplication';
 
 type Props = { // Props
   appId: string;
+  isEditMode: boolean;
 }
 
 
@@ -31,9 +32,18 @@ const ApplicationCard: React.FC<Props> = (props) => {
           {application?.name}
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small" onClick={() => setShowUpdateApplication(!showUpdateApplication)}>Edit</Button>
-      </CardActions>
+      {
+        props.isEditMode ?
+          (
+            <CardActions>
+              <Button size="small" onClick={() => setShowUpdateApplication(!showUpdateApplication)}>Edit</Button>
+            </CardActions>
+          ) : (
+
+            <CardActions />
+          )
+
+      }
     </React.Fragment>
   );
 
@@ -53,9 +63,9 @@ const ApplicationCard: React.FC<Props> = (props) => {
   return (
     <Box>
       <Paper>
-      {
-       showUpdateApplication ? <Card variant="outlined">{updateCard}</Card> :<Card variant="outlined">{card}</Card>
-      }
+        {
+          showUpdateApplication && props.isEditMode ? <Card variant="outlined">{updateCard}</Card> : <Card variant="outlined">{card}</Card>
+        }
       </Paper>
     </Box>
   )

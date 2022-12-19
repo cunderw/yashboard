@@ -10,11 +10,19 @@ import PopupModal from '../components/PopupModal';
 
 const Home: React.FC = () => {
   const [addAppModalOpen, setAppModalOpen] = useState(false);
-  const openAddAppModal = () => {setAppModalOpen(true)};
+  const [isEditMode, setEditMode] = useState(false);
+  const openAddAppModal = () => setAppModalOpen(true);
   const closeAddAppModal = () => setAppModalOpen(false);
+  const enableEditMode = () => setEditMode(true);
+  const disableEditMode = () => setEditMode(false)
 
   return (
-    <Layout openAddAppModal={openAddAppModal}>
+    <Layout
+      openAddAppModal={openAddAppModal}
+      enableEditMode={enableEditMode}
+      disableEditMode={disableEditMode}
+      isEditMode={isEditMode}
+    >
       <Head>
         <title>YaSHBoard</title>
         <meta name="description" content="Yet Another Self Hosted Dashboard" />
@@ -27,7 +35,9 @@ const Home: React.FC = () => {
       >
         <AddApplicationForm />
       </PopupModal>
-      <Applications />
+      <Applications
+        isEditMode={isEditMode}
+      />
     </Layout>
   )
 }
