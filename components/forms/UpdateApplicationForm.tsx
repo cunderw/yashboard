@@ -14,6 +14,9 @@ const UpdateApplication: React.FC<Props> = props => {
   const { application, isError, isLoading } = useApplication(props.appId)
   const [name, setName] = useState(application?.name)
   const [url, setUrl] = useState(application?.url)
+  const [livenessUrl, setLiveNessUrl] = useState(application?.livenessUrl)
+  const [apiKey, setApiKey] = useState(application?.apiKey)
+  const [keyParam, setKeyParam] = useState(application?.keyParam)
   const [error, setError] = useState('')
   const [message, setMessage] = useState('')
 
@@ -30,6 +33,9 @@ const UpdateApplication: React.FC<Props> = props => {
       id,
       name,
       url,
+      livenessUrl,
+      apiKey,
+      keyParam,
     }
     fetch('/api/applications/', {
       method: 'PUT',
@@ -90,6 +96,27 @@ const UpdateApplication: React.FC<Props> = props => {
           label="URL"
           value={url}
           onChange={e => setUrl(e.target.value)}
+        />
+        <TextField
+          variant="outlined"
+          id="liveness-url-input"
+          label="Liveness URL"
+          value={livenessUrl ?? ''}
+          onChange={e => setLiveNessUrl(e.target.value)}
+        />
+        <TextField
+          variant="outlined"
+          id="api-key-input"
+          label="API Key"
+          value={apiKey ?? ''}
+          onChange={e => setApiKey(e.target.value)}
+        />
+        <TextField
+          variant="outlined"
+          id="key-param-input"
+          label="API Key Param"
+          value={keyParam ?? ''}
+          onChange={e => setKeyParam(e.target.value)}
         />
         <Button
           variant="contained"
