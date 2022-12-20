@@ -22,6 +22,13 @@ const ApplicationCard: React.FC<Props> = props => {
   if (isError) return <div>failed to load</div>
   if (isLoading) return <div>loading...</div>
 
+  const openInNewTab = (url: string | URL | undefined) => {
+    if (!props.isEditMode) {
+      const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+      if (newWindow) newWindow.opener = null
+    }
+  }
+
   const card = (
     <React.Fragment>
       <CardContent>
@@ -64,7 +71,7 @@ const ApplicationCard: React.FC<Props> = props => {
   )
 
   return (
-    <Box>
+    <Box onClick={() => openInNewTab(application?.url)}>
       <Paper>
         {showUpdateApplication && props.isEditMode ? (
           <Card variant="outlined">{updateCard}</Card>
