@@ -13,10 +13,10 @@ const Applications: React.FC<Props> = props => {
   if (isError) return <div>failed to load</div>
   if (isLoading) return <div>loading...</div>
 
-  return (
-    <Grid container spacing={1}>
-      {applications !== undefined && applications.length > 0 ? (
-        applications.map(application => (
+  if (applications !== undefined && applications.length > 0) {
+    return (
+      <Grid container spacing={1}>
+        {applications.map(application => (
           <Grid key={application.id} item xs={12} sm={6} md={2} zeroMinWidth>
             <ApplicationCard
               key={application.id}
@@ -24,12 +24,12 @@ const Applications: React.FC<Props> = props => {
               isEditMode={props.isEditMode}
             />
           </Grid>
-        ))
-      ) : (
-        <Alert severity="warning">You do not have any apps added!</Alert>
-      )}
-    </Grid>
-  )
+        ))}
+      </Grid>
+    )
+  }
+
+  return <Alert severity="warning">You do not have any apps added!</Alert>
 }
 
 export default Applications
