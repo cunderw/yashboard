@@ -9,21 +9,27 @@ export default async function handle(
     const applications = await prisma.application.findMany({})
     return res.json(applications)
   } else if (req.method == 'POST') {
-    const { name, url } = req.body
+    const { name, url, livenessUrl, apiKey, keyParam } = req.body
     const result = await prisma.application.create({
       data: {
         name,
         url,
+        livenessUrl,
+        apiKey,
+        keyParam,
       },
     })
     return res.json(result)
   } else if (req.method == 'PUT') {
-    const { id, name, url } = req.body
+    const { id, name, url, livenessUrl, apiKey, keyParam } = req.body
     const post = await prisma.application.update({
       where: { id: String(id) },
       data: {
         name: String(name),
         url: String(url),
+        livenessUrl: String(livenessUrl),
+        apiKey: String(apiKey),
+        keyParam: String(keyParam),
       },
     })
     return res.json(post)

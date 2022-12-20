@@ -11,4 +11,7 @@ model application {
   id String @id @default(cuid())
   name String
   url String
+  livenessUrl String?
+  apiKey String?
+  keyParam String?
 }

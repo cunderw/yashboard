@@ -1,13 +1,15 @@
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import ErrorIcon from '@mui/icons-material/Error'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
-import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import React, { useState } from 'react'
 import UpdateApplicationForm from '../components/forms/UpdateApplicationForm'
 import { useApplication } from '../hooks/UseApplication'
+import { ApplicationStatus } from '../models/Application'
 
 type Props = {
   // Props
@@ -31,26 +33,35 @@ const ApplicationCard: React.FC<Props> = props => {
 
   const card = (
     <React.Fragment>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" noWrap>
-          {application?.url}
-        </Typography>
-        <Typography variant="h5" noWrap>
-          {application?.name}
-        </Typography>
-      </CardContent>
-      {props.isEditMode ? (
-        <CardActions>
-          <Button
-            size="small"
-            onClick={() => setShowUpdateApplication(!showUpdateApplication)}
-          >
-            Edit
-          </Button>
-        </CardActions>
-      ) : (
-        <CardActions />
-      )}
+      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <CardContent sx={{ flex: '1 0 auto' }}>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" noWrap>
+            {application?.url}
+          </Typography>
+          <Typography variant="h5" noWrap>
+            {application?.name}
+          </Typography>
+        </CardContent>
+        {props.isEditMode ? (
+          <CardActions>
+            <Button
+              size="small"
+              onClick={() => setShowUpdateApplication(!showUpdateApplication)}
+            >
+              Edit
+            </Button>
+          </CardActions>
+        ) : (
+          <CardActions />
+        )}
+      </Box>
+      <Box sx={{ m: 2 }}>
+        {application?.status === ApplicationStatus.OK ? (
+          <CheckCircleIcon />
+        ) : (
+          <ErrorIcon />
+        )}
+      </Box>
     </React.Fragment>
   )
 
@@ -72,13 +83,15 @@ const ApplicationCard: React.FC<Props> = props => {
 
   return (
     <Box onClick={() => openInNewTab(application?.url)}>
-      <Paper>
-        {showUpdateApplication && props.isEditMode ? (
-          <Card variant="outlined">{updateCard}</Card>
-        ) : (
-          <Card variant="outlined">{card}</Card>
-        )}
-      </Paper>
+      {showUpdateApplication && props.isEditMode ? (
+        <Card variant="outlined" sx={{ display: 'flex' }}>
+          {updateCard}
+        </Card>
+      ) : (
+        <Card variant="outlined" sx={{ display: 'flex' }}>
+          {card}
+        </Card>
+      )}
     </Box>
   )
 }

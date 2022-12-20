@@ -8,6 +8,9 @@ import { useState } from 'react'
 const AddApplication: React.FC = () => {
   const [name, setName] = useState('')
   const [url, setUrl] = useState('')
+  const [livenessUrl, setLiveNessUrl] = useState('')
+  const [apiKey, setApiKey] = useState('')
+  const [keyParam, setKeyParam] = useState('')
   const [error, setError] = useState('')
   const [message, setMessage] = useState('')
 
@@ -23,6 +26,9 @@ const AddApplication: React.FC = () => {
     const data = {
       name,
       url,
+      livenessUrl,
+      apiKey,
+      keyParam,
     }
     fetch('/api/applications', {
       method: 'POST',
@@ -35,6 +41,9 @@ const AddApplication: React.FC = () => {
       .then(() => {
         setName('')
         setUrl('')
+        setLiveNessUrl('')
+        setApiKey('')
+        setKeyParam('')
         setMessage('App added successfully')
       })
   }
@@ -65,6 +74,27 @@ const AddApplication: React.FC = () => {
           label="URL"
           value={url}
           onChange={e => setUrl(e.target.value)}
+        />
+        <TextField
+          variant="outlined"
+          id="liveness-url-input"
+          label="Liveness URL"
+          value={livenessUrl}
+          onChange={e => setLiveNessUrl(e.target.value)}
+        />
+        <TextField
+          variant="outlined"
+          id="api-key-input"
+          label="API Key"
+          value={apiKey}
+          onChange={e => setApiKey(e.target.value)}
+        />
+        <TextField
+          variant="outlined"
+          id="key-param-input"
+          label="Key Param"
+          value={keyParam}
+          onChange={e => setKeyParam(e.target.value)}
         />
         <Button variant="contained" onClick={() => addApplication()}>
           Submit
