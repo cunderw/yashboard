@@ -17,7 +17,14 @@ const Applications: React.FC<Props> = props => {
     return (
       <Grid container spacing={1}>
         {applications.map(application => (
-          <Grid key={application.id} item xs={12} sm={6} md={2} zeroMinWidth>
+          <Grid
+            key={application.id}
+            item
+            xs={12}
+            sm={6}
+            md={2}
+            sx={{ minWidth: 275 }}
+          >
             <ApplicationCard
               key={application.id}
               appId={application.id}
